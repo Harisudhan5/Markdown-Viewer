@@ -1,96 +1,742 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="/_vercel/insights/script.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
-    />
-    <title>Vercel HTML Starter</title>
-    <meta
-      name="description"
-      content="High-performance HTML based website template."
-    />
-  </head>
-  <body>
-    <h1>Vercel HTML Starter</h1>
-    <p>
-      This template is a simple, but powerful single
-      <code>index.html</code> file deployed to
-      <a href="https://vercel.com">Vercel</a>. When your site is deployed, all
-      static assets (like HTML, JavaScript, CSS, images, and more) are deployed
-      globally to every
-      <a href="https://vercel.com/docs/concepts/edge-network/overview"
-        >Vercel Edge Network</a
-      >
-      region.
-    </p>
-    <h2>Simple, privacy-friendly analytics</h2>
-    <p>
-      Want to understand your visitor traffic? Vercel Analytics gives you
-      first-party, privacy-friendly traffic analytics for your HTML site. This
-      template is already configured using the following script:
-    </p>
-    <pre><code>&lt;script defer src="/_vercel/insights/script.js"&gt;&lt;/script&gt;</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/analytics">Vercel Analytics</a>.
-    </p>
-    <h2>Integrated with git</h2>
-    <p>
-      Deploying updates to your site is as simple as
-      <code>git push</code> thanks to Vercel's advanced
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-      Support for GitHub, GitLab, Bitbucket is zero-configuration, and with the
-      flexible Vercel CLI and API, you can integrate with any tool possible.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-    </p>
-    <h2>Fast <code>gzip</code> compression</h2>
-    <p>
-      To help ensure the smallest possible file sizes for your static assets,
-      the Vercel Edge Network compresses files by default using
-      <code>gzip</code>. You can also optionally use
-      <code>brotli</code> compressesion if you prefer.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/edge-network/compression"
-        >compression</a
-      >.
-    </p>
-    <h2>Advanced routing configuration</h2>
-    <p>
-      Vercel gives you a variety of ways to configure the routing of your
-      website. For example, adding redirects, rewrites, or headers to your page.
-      While you can use <code>vercel.json</code> to define these through JSON,
-      you can also express your routing configuration as code using
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-    <p>
-      Middleware runs before the
-      <a href="https://vercel.com/docs/concepts/edge-network/caching"
-        >Vercel Edge Network Cache</a
-      >, so you can configure routing exactly as your application needs. For
-      example, this template uses <code>middleware.js</code> defined in the root
-      of the repository to add additional security headers to the site:
-    </p>
-    <pre><code>referrer-policy: origin-when-cross-origin
-strict-transport-security: max-age=31536000; includeSubDomains; preload
-x-content-type-options: nosniff
-x-dns-prefetch-control: on
-x-frame-options: DENY</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-  </body>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <title>Markdown Viewer & Editor — Real-Time Online Live Preview</title>
+  <meta name="description" content="Fast, clean, and real-time online Markdown Viewer and Editor. Preview your .md files instantly, toggle dark mode, and export to PDF. Free web tool for developers." />
+  <meta name="keywords" content="Markdown viewer, markdown editor, online markdown, real-time markdown preview, md editor, export markdown to pdf" />
+  <meta name="author" content="Your Name or Brand" />
+  <meta name="robots" content="index, follow" />
+  
+  <link rel="canonical" href="https://your-domain.com/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://your-domain.com/" />
+  <meta property="og:title" content="Markdown Viewer & Editor — Real-Time Live Preview" />
+  <meta property="og:description" content="Instantly view and edit your Markdown files with live rendering. Clean UI, dark mode support, and seamless PDF exporting." />
+  <meta property="og:image" content="https://your-domain.com/og-image.jpg" />
+
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://your-domain.com/" />
+  <meta property="twitter:title" content="Markdown Viewer & Editor — Real-Time Live Preview" />
+  <meta property="twitter:description" content="Instantly view and edit your Markdown files with live rendering. Clean UI, dark mode support, and seamless PDF exporting." />
+  <meta property="twitter:image" content="https://your-domain.com/og-image.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Markdown Viewer & Editor",
+    "description": "An online real-time Markdown editor and viewer with dark mode and PDF export capabilities.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" id="hljs-light"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" id="hljs-dark" disabled/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ── Tokens & Cool Glow Theme ─────────────────────────── */
+    [data-theme="light"] {
+      --bg:            #f9fafb;
+      --surface:       #ffffff;
+      --surface2:      #f3f4f6;
+      --border:        #e5e7eb;
+      --text:          #111827;
+      --text2:         #4b5563;
+      --text3:         #9ca3af;
+      --topbar-bg:     #ffffff;
+      --toggle-track:  #f3f4f6;
+      --toggle-act:    #111827;
+      --toggle-txt:    #6b7280;
+      --toggle-atxt:   #ffffff;
+      --select-bg:     #ffffff;
+      --gutter-bg:     #f9fafb;
+      --gutter-txt:    #cbd5e1;
+      --input-bg:      #ffffff;
+      --input-txt:     #111827;
+      --pre-bg:        #f8fafc;
+      --code-bg:       #f1f5f9;
+      --code-border:   #e2e8f0;
+      --accent:        #6366f1;
+      --accent-glow:   rgba(99, 102, 241, 0.15);
+    }
+    [data-theme="dark"] {
+      --bg:            #09090b;
+      --surface:       #18181b;
+      --surface2:      #0c0c0e;
+      --border:        #27272a;
+      --text:          #f9fafb;
+      --text2:         #a1a1aa;
+      --text3:         #52525b;
+      --topbar-bg:     #121214;
+      --toggle-track:  #27272a;
+      --toggle-act:    #f9fafb;
+      --toggle-txt:    #71717a;
+      --toggle-atxt:   #09090b;
+      --select-bg:     #27272a;
+      --gutter-bg:     #0c0c0e;
+      --gutter-txt:    #3f3f46;
+      --input-bg:      #121214;
+      --input-txt:     #f9fafb;
+      --pre-bg:        #0c0c0e;
+      --code-bg:       #27272a;
+      --code-border:   #3f3f46;
+      --accent:        #818cf8;
+      --accent-glow:   rgba(129, 140, 248, 0.25);
+    }
+
+    /* ── Reset & Global ────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      transition: background .3s ease, color .3s ease;
+    }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text3); }
+
+    /* ── Top Bar ────────────────────────────── */
+    .topbar {
+      height: 56px;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      background: var(--topbar-bg);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      transition: background .3s, border-color .3s;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+      z-index: 10;
+    }
+
+    /* Changed to h1 for SEO, kept exact styles */
+    .app-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.2px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+
+
+    .topbar-center {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ── Mode Toggle ─────────────────────────── */
+    .mode-toggle {
+      display: inline-flex;
+      align-items: center;
+      background: var(--toggle-track);
+      border-radius: 10px;
+      padding: 4px;
+      gap: 4px;
+      transition: background .3s;
+    }
+    
+    .toggle-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 7px;
+      border: none;
+      cursor: pointer;
+      background: transparent;
+      color: var(--toggle-txt);
+      transition: all .2s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+      line-height: 1.2;
+    }
+    
+    .toggle-btn.active {
+      background: var(--toggle-act);
+      color: var(--toggle-atxt);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .toggle-btn:not(.active):hover {
+      color: var(--text);
+      background: rgba(0,0,0,0.05);
+    }
+    [data-theme="dark"] .toggle-btn:not(.active):hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* ── Theme Select ────────────────────────── */
+    .topbar-right {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+    
+    .theme-select {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 32px 6px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--select-bg);
+      color: var(--text2);
+      cursor: pointer;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23a1a1aa' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      transition: all .2s ease;
+    }
+    
+    .theme-select:hover { 
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+    .theme-select:focus { border-color: var(--accent); }
+    .theme-select option { background: var(--select-bg); color: var(--text); }
+
+    /* ── Workspace ───────────────────────────── */
+    .workspace {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .panel {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .panel-header {
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      flex-shrink: 0;
+      transition: background .3s, border-color .3s;
+    }
+    
+    .panel-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+
+    /* ── PDF Download Button ─────────────────── */
+    .pdf-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--accent);
+      background: transparent;
+      color: var(--accent);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all .2s ease;
+      opacity: 0;
+      transform: translateY(4px);
+      pointer-events: none;
+    }
+    
+    .pdf-btn.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    
+    .pdf-btn:hover {
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+    
+    .pdf-btn::before {
+      content: '';
+      display: inline-block;
+      width: 10px;
+      height: 12px;
+      background-color: currentColor;
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3E%3Cpath d='M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z'/%3E%3C/svg%3E") no-repeat center;
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3E%3Cpath d='M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z'/%3E%3C/svg%3E") no-repeat center;
+    }
+
+    /* ── Left Panel ──────────────────────────── */
+    .panel-left {
+      width: 48%;
+      border-right: 1px solid var(--border);
+      flex-shrink: 0;
+      transition: border-color .3s;
+    }
+
+    .editor-wrap {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .line-gutter {
+      width: 46px;
+      background: var(--gutter-bg);
+      border-right: 1px solid var(--border);
+      padding-top: 14px;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      padding-right: 10px;
+      transition: background .3s, border-color .3s;
+    }
+    
+    .line-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--gutter-txt);
+      line-height: 22.36px;
+      min-height: 22.36px;
+      display: block;
+      user-select: none;
+    }
+
+    textarea#md-input {
+      flex: 1;
+      height: 100%;
+      padding: 14px 18px;
+      border: none;
+      outline: none;
+      resize: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.72;
+      color: var(--input-txt);
+      background: var(--input-bg);
+      caret-color: var(--accent);
+      tab-size: 2;
+      transition: background .3s, color .3s;
+    }
+    textarea#md-input::placeholder { color: var(--text3); }
+
+    /* ── Divider ─────────────────────────────── */
+    .divider {
+      width: 2px;
+      background: var(--border);
+      cursor: col-resize;
+      flex-shrink: 0;
+      transition: background .15s ease;
+      position: relative;
+    }
+    
+    .divider::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0; left: -4px; right: -4px;
+    }
+    
+    .divider:hover, .divider.dragging { 
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    /* ── Right Panel ─────────────────────────── */
+    .panel-right { flex: 1; background: var(--surface2); transition: background .3s; }
+
+    .preview-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 40px 48px;
+    }
+    
+    .preview-body {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* ── CLEAN PREVIEW ── */
+    .preview-body h1,
+    .preview-body h2,
+    .preview-body h3,
+    .preview-body h4,
+    .preview-body h5,
+    .preview-body h6 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-top: 1.75em;
+      margin-bottom: 0.5em;
+    }
+    .preview-body h1 { font-size: 2em; font-weight: 800; }
+    .preview-body h2 { font-size: 1.5em; padding-bottom: 0.3em; border-bottom: 1px solid var(--border); }
+    .preview-body h3 { font-size: 1.25em; }
+    .preview-body h4 { font-size: 1.1em; }
+
+    .preview-body p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text2);
+      margin-bottom: 1.2em;
+    }
+
+    .preview-body a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--accent-glow);
+      transition: text-decoration-color .2s ease;
+    }
+    .preview-body a:hover { text-decoration-color: var(--accent); }
+
+    .preview-body ul, .preview-body ol {
+      padding-left: 1.75em;
+      margin-bottom: 1.2em;
+    }
+    .preview-body li {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text2);
+      margin-bottom: 0.4em;
+    }
+
+    .preview-body blockquote {
+      margin: 1.5em 0;
+      padding: 0.5em 0 0.5em 1.25em;
+      border-left: 4px solid var(--accent);
+      color: var(--text2);
+      background: var(--surface);
+      border-radius: 0 6px 6px 0;
+    }
+    .preview-body blockquote p { margin: 0; color: inherit; font-size: 15px; }
+
+    .preview-body hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2.5em 0;
+    }
+
+    .preview-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5em;
+      font-size: 14px;
+    }
+    .preview-body th {
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      border-bottom: 2px solid var(--border);
+      background: var(--surface);
+    }
+    .preview-body td {
+      padding: 10px 14px;
+      color: var(--text2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .preview-body code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      background: var(--code-bg);
+      color: var(--accent);
+      padding: 2px 6px;
+      border-radius: 5px;
+      border: 1px solid var(--code-border);
+    }
+
+    .preview-body pre {
+      margin: 1.5em 0;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      background: var(--pre-bg);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+    .preview-body pre code {
+      display: block;
+      padding: 20px;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      font-size: 12.5px;
+      line-height: 1.65;
+      overflow-x: auto;
+      color: var(--text);
+    }
+
+    .preview-body img { max-width: 100%; border-radius: 8px; }
+    .preview-body strong { font-weight: 700; color: var(--text); }
+
+    /* ── Empty State ─────────────────────────── */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      min-height: 320px;
+      color: var(--text3);
+      font-size: 14px;
+      text-align: center;
+      gap: 12px;
+    }
+    
+    .empty-state::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 40px;
+      background-color: currentColor;
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M448 32H64C28.65 32 0 60.65 0 96v320c0 35.35 28.65 64 64 64h384c35.35 0 64-28.65 64-64V96C512 60.65 483.3 32 448 32zM212 176c0-11.05 8.954-20 20-20h104c11.05 0 20 8.954 20 20s-8.954 20-20 20H232C220.1 196 212 187.1 212 176zM356 336H156c-11.05 0-20-8.954-20-20s8.954-20 20-20h200c11.05 0 20 8.954 20 20S367.1 336 356 336zM356 256H156c-11.05 0-20-8.954-20-20s8.954-20 20-20h200c11.05 0 20 8.954 20 20S367.1 256 356 256z'/%3E%3C/svg%3E") no-repeat center;
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M448 32H64C28.65 32 0 60.65 0 96v320c0 35.35 28.65 64 64 64h384c35.35 0 64-28.65 64-64V96C512 60.65 483.3 32 448 32zM212 176c0-11.05 8.954-20 20-20h104c11.05 0 20 8.954 20 20s-8.954 20-20 20H232C220.1 196 212 187.1 212 176zM356 336H156c-11.05 0-20-8.954-20-20s8.954-20 20-20h200c11.05 0 20 8.954 20 20S367.1 336 356 336zM356 256H156c-11.05 0-20-8.954-20-20s8.954-20 20-20h200c11.05 0 20 8.954 20 20S367.1 256 356 256z'/%3E%3C/svg%3E") no-repeat center;
+    }
+
+    /* ── Footer ──────────────────────────────── */
+    .footbar {
+      height: 32px;
+      background: var(--topbar-bg);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      gap: 24px;
+      flex-shrink: 0;
+      transition: background .3s, border-color .3s;
+    }
+    
+    .foot-item {
+      font-size: 11px;
+      color: var(--text3);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .foot-item b { color: var(--text2); font-weight: 700; }
+
+    /* ── Native PDF Print Rules ──────────────── */
+    @media print {
+      body * { visibility: hidden; }
+      .preview-scroll, .preview-scroll * { visibility: visible; }
+      .preview-scroll {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        padding: 0;
+      }
+      .preview-body { max-width: 100%; }
+      pre, blockquote { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="topbar">
+  <h1 class="app-title">Markdown Viewer</h1>
+
+  <div class="topbar-center">
+    <div class="mode-toggle">
+      <button class="toggle-btn" onclick="setMode('llm', this)">LLM Generated Markdown</button>
+      <button class="toggle-btn active" onclick="setMode('normal', this)">Normal Markdown</button>
+    </div>
+  </div>
+
+  <div class="topbar-right">
+    <select class="theme-select" onchange="setTheme(this.value)">
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
+  </div>
+</header>
+
+<main class="workspace" id="workspace">
+
+  <div class="panel panel-left" id="panel-left">
+    <div class="panel-header">
+      <span class="panel-label">Input</span>
+    </div>
+    <div class="editor-wrap">
+      <div class="line-gutter" id="gutter"></div>
+      <textarea id="md-input" spellcheck="false" placeholder="Paste your markdown here..."></textarea>
+    </div>
+  </div>
+
+  <div class="divider" id="divider"></div>
+
+  <div class="panel panel-right">
+    <div class="panel-header">
+      <span class="panel-label">Preview</span>
+      <button id="pdf-btn" class="pdf-btn" onclick="window.print()">Download as PDF</button>
+    </div>
+    <div class="preview-scroll">
+      <div class="preview-body" id="preview-output">
+        <div class="empty-state">Paste markdown on the left to preview it here.</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footbar">
+  <div class="foot-item">Words <b id="f-words">0</b></div>
+  <div class="foot-item">Characters <b id="f-chars">0</b></div>
+  <div class="foot-item">Lines <b id="f-lines">0</b></div>
+  <div class="foot-item">Mode <b id="f-mode">Normal Markdown</b></div>
+</footer>
+
+<script>
+  const input  = document.getElementById('md-input');
+  const output = document.getElementById('preview-output');
+  const gutter = document.getElementById('gutter');
+  const pdfBtn = document.getElementById('pdf-btn');
+  let mode = 'normal';
+  let timer;
+
+  /* Marked config */
+  marked.setOptions({ breaks: true, gfm: true });
+  const renderer = new marked.Renderer();
+  renderer.code = function(code, lang) {
+    const language = lang || 'plaintext';
+    let hl;
+    try { hl = hljs.highlight(code, { language, ignoreIllegals: true }).value; }
+    catch { hl = hljs.highlightAuto(code).value; }
+    return `<pre><code class="hljs">${hl}</code></pre>`;
+  };
+  marked.use({ renderer });
+
+  /* Render */
+  function render(text) {
+    if (!text.trim()) {
+      output.innerHTML = '<div class="empty-state">Paste markdown on the left to preview it here.</div>';
+      stats('');
+      pdfBtn.classList.remove('visible');
+      return;
+    }
+    
+    // Show PDF button if there is content
+    pdfBtn.classList.add('visible');
+    
+    const src = mode === 'llm'
+      ? text.replace(/\\n/g, '\n').replace(/\\t/g, '\t')
+      : text;
+    output.innerHTML = marked.parse(src);
+    stats(text);
+  }
+
+  function stats(text) {
+    document.getElementById('f-words').textContent = (text.trim() ? text.trim().split(/\s+/).length : 0).toLocaleString();
+    document.getElementById('f-chars').textContent = text.length.toLocaleString();
+    document.getElementById('f-lines').textContent = (text ? text.split('\n').length : 0).toLocaleString();
+  }
+
+  function updateGutter() {
+    const n = input.value.split('\n').length;
+    let h = '';
+    for (let i = 1; i <= n; i++) h += `<span class="line-num">${i}</span>`;
+    gutter.innerHTML = h;
+  }
+
+  input.addEventListener('input', () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => render(input.value), 80);
+    updateGutter();
+  });
+  input.addEventListener('scroll', () => { gutter.scrollTop = input.scrollTop; });
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      const s = input.selectionStart;
+      input.value = input.value.slice(0, s) + '  ' + input.value.slice(input.selectionEnd);
+      input.selectionStart = input.selectionEnd = s + 2;
+    }
+  });
+
+  /* Mode */
+  function setMode(m, btn) {
+    mode = m;
+    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('f-mode').textContent = m === 'llm' ? 'LLM Generated' : 'Normal Markdown';
+    render(input.value);
+  }
+
+  /* Theme */
+  function setTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    document.getElementById('hljs-light').disabled = (t === 'dark');
+    document.getElementById('hljs-dark').disabled  = (t === 'light');
+  }
+
+  /* Resizable divider */
+  (function () {
+    const div  = document.getElementById('divider');
+    const ws   = document.getElementById('workspace');
+    const left = document.getElementById('panel-left');
+    let drag = false, sx = 0, sw = 0;
+    
+    div.addEventListener('mousedown', e => {
+      drag = true; sx = e.clientX; sw = left.offsetWidth;
+      div.classList.add('dragging');
+      document.body.style.cursor = 'col-resize';
+      document.body.style.userSelect = 'none';
+    });
+    
+    document.addEventListener('mousemove', e => {
+      if (!drag) return;
+      const w = Math.min(Math.max(260, sw + e.clientX - sx), ws.offsetWidth - 260);
+      left.style.width = w + 'px';
+    });
+    
+    document.addEventListener('mouseup', () => {
+      if (!drag) return;
+      drag = false;
+      div.classList.remove('dragging');
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+    });
+  })();
+
+  updateGutter();
+</script>
+</body>
 </html>
