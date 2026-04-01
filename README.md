@@ -1,14 +1,17 @@
----
-name: HTML Starter
-slug: html-starter-with-analytics
-description: HTML5 template with analytics and advanced routing configuration.
-deployUrl: https://vercel.com/new/clone?repository-url=https://github.com/vercel/examples/tree/main/solutions/html&project-name=html
-relatedTemplates:
-  - nextjs-boilerplate
----
+# Markdown Viewer
 
-# HTML Starter
+A lightweight, browser-based tool designed to render Markdown instantly. It features a specialized toggle to switch between standard Markdown and LLM-formatted text strings.
 
-This is a starter HTML5 templates which is configured with Vercel Analytics (through a `script` tag), advanced routing with [Vercel Edge Middleware](https://vercel.com/docs/concepts/functions/edge-middleware), as well as some basic styles
+## 🚀 Two-Stream Rendering
+This tool was built specifically to handle the two ways we usually interact with Markdown today:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/examples/tree/main/solutions/html&project-name=html)
+1.  **Normal Markdown:** standard GFM (GitHub Flavored Markdown) parsing for your `.md` files.
+2.  **LLM Generated:** A specialized mode that handles "raw" strings from AI outputs (like Gemini or GPT) by correctly interpreting escaped characters like `\n` and `\t` into visual formatting.
+
+## ✨ Core Features
+* **Split-Pane Interface:** Edit on the left, see the live preview on the right.
+* **Responsive Resizer:** Click and drag the divider to adjust your workspace.
+* **Syntax Highlighting:** Automatic code block styling using Highlight.js.
+* **Dark Mode Support:** A sleek, developer-friendly dark theme.
+* **PDF Export:** A clean "Print to PDF" layout that removes the editor UI for a professional document finish.
+* **Editor Essentials:** Integrated line numbers and Tab-key support (2-space indentation).
