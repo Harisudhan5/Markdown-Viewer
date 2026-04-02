@@ -130,7 +130,6 @@
       z-index: 10;
     }
 
-    /* Changed to h1 for SEO, kept exact styles */
     .app-title {
       font-size: 14px;
       font-weight: 700;
@@ -141,8 +140,6 @@
       align-items: center;
       gap: 8px;
     }
-    
-
 
     .topbar-center {
       flex: 1;
@@ -223,17 +220,51 @@
     .theme-select:focus { border-color: var(--accent); }
     .theme-select option { background: var(--select-bg); color: var(--text); }
 
-    /* ── Workspace ───────────────────────────── */
+    /* ── Mobile Header Stacking ─────────────────── */
+    @media (max-width: 767px) {
+      .topbar {
+        height: auto;
+        flex-direction: column;
+        padding: 16px;
+        gap: 12px;
+      }
+      .topbar-center, .topbar-right {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+      .mode-toggle {
+        flex-direction: column;
+        width: 100%;
+      }
+      .toggle-btn {
+        width: 100%;
+        text-align: center;
+      }
+      .theme-select {
+        width: 100%;
+      }
+    }
+
+    /* ── Workspace & Responsive Logic ──────────────── */
     .workspace {
       display: flex;
+      flex-direction: column; /* Mobile: Top-Bottom */
       flex: 1;
       overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .workspace {
+        flex-direction: row; /* PC: Left-Right */
+      }
     }
 
     .panel {
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      flex: 1; /* Equal space on mobile */
     }
 
     .panel-header {
@@ -298,12 +329,18 @@
       mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3E%3Cpath d='M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z'/%3E%3C/svg%3E") no-repeat center;
     }
 
-    /* ── Left Panel ──────────────────────────── */
+    /* ── Left Panel (Editor) ──────────────────────────── */
     .panel-left {
-      width: 48%;
-      border-right: 1px solid var(--border);
-      flex-shrink: 0;
-      transition: border-color .3s;
+      border-bottom: 1px solid var(--border); /* Divider for mobile */
+    }
+
+    @media (min-width: 768px) {
+      .panel-left {
+        width: 48%;
+        border-bottom: none;
+        border-right: 1px solid var(--border);
+        flex: none; /* Let the divider handle the width on PC */
+      }
     }
 
     .editor-wrap {
@@ -319,13 +356,17 @@
       padding-top: 14px;
       overflow: hidden;
       flex-shrink: 0;
-      display: flex;
+      display: none; /* Hide on mobile to save space */
       flex-direction: column;
       align-items: flex-end;
       padding-right: 10px;
       transition: background .3s, border-color .3s;
     }
     
+    @media (min-width: 768px) {
+      .line-gutter { display: flex; } /* Show on PC */
+    }
+
     .line-num {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
@@ -356,12 +397,17 @@
 
     /* ── Divider ─────────────────────────────── */
     .divider {
+      display: none; /* Hide on mobile */
       width: 2px;
       background: var(--border);
       cursor: col-resize;
       flex-shrink: 0;
       transition: background .15s ease;
       position: relative;
+    }
+    
+    @media (min-width: 768px) {
+      .divider { display: block; }
     }
     
     .divider::after {
@@ -375,144 +421,33 @@
       box-shadow: 0 0 8px var(--accent-glow);
     }
 
-    /* ── Right Panel ─────────────────────────── */
+    /* ── Right Panel (Preview) ─────────────────────────── */
     .panel-right { flex: 1; background: var(--surface2); transition: background .3s; }
 
     .preview-scroll {
       flex: 1;
       overflow-y: auto;
-      padding: 40px 48px;
+      padding: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .preview-scroll { padding: 40px 48px; }
     }
     
     .preview-body {
       max-width: 680px;
       margin: 0 auto;
+      height: 100%; /* Keep full height for empty state alignment */
     }
 
-    /* ── CLEAN PREVIEW ── */
-    .preview-body h1,
-    .preview-body h2,
-    .preview-body h3,
-    .preview-body h4,
-    .preview-body h5,
-    .preview-body h6 {
-      font-family: 'Inter', sans-serif;
-      font-weight: 700;
-      line-height: 1.3;
-      color: var(--text);
-      margin-top: 1.75em;
-      margin-bottom: 0.5em;
-    }
-    .preview-body h1 { font-size: 2em; font-weight: 800; }
-    .preview-body h2 { font-size: 1.5em; padding-bottom: 0.3em; border-bottom: 1px solid var(--border); }
-    .preview-body h3 { font-size: 1.25em; }
-    .preview-body h4 { font-size: 1.1em; }
-
-    .preview-body p {
-      font-size: 15px;
-      line-height: 1.8;
-      color: var(--text2);
-      margin-bottom: 1.2em;
-    }
-
-    .preview-body a {
-      color: var(--accent);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-color: var(--accent-glow);
-      transition: text-decoration-color .2s ease;
-    }
-    .preview-body a:hover { text-decoration-color: var(--accent); }
-
-    .preview-body ul, .preview-body ol {
-      padding-left: 1.75em;
-      margin-bottom: 1.2em;
-    }
-    .preview-body li {
-      font-size: 15px;
-      line-height: 1.8;
-      color: var(--text2);
-      margin-bottom: 0.4em;
-    }
-
-    .preview-body blockquote {
-      margin: 1.5em 0;
-      padding: 0.5em 0 0.5em 1.25em;
-      border-left: 4px solid var(--accent);
-      color: var(--text2);
-      background: var(--surface);
-      border-radius: 0 6px 6px 0;
-    }
-    .preview-body blockquote p { margin: 0; color: inherit; font-size: 15px; }
-
-    .preview-body hr {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 2.5em 0;
-    }
-
-    .preview-body table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 1.5em;
-      font-size: 14px;
-    }
-    .preview-body th {
-      padding: 10px 14px;
-      text-align: left;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text);
-      border-bottom: 2px solid var(--border);
-      background: var(--surface);
-    }
-    .preview-body td {
-      padding: 10px 14px;
-      color: var(--text2);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .preview-body code {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12.5px;
-      background: var(--code-bg);
-      color: var(--accent);
-      padding: 2px 6px;
-      border-radius: 5px;
-      border: 1px solid var(--code-border);
-    }
-
-    .preview-body pre {
-      margin: 1.5em 0;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      overflow: hidden;
-      background: var(--pre-bg);
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-    }
-    .preview-body pre code {
-      display: block;
-      padding: 20px;
-      background: transparent;
-      border: none;
-      border-radius: 0;
-      font-size: 12.5px;
-      line-height: 1.65;
-      overflow-x: auto;
-      color: var(--text);
-    }
-
-    .preview-body img { max-width: 100%; border-radius: 8px; }
-    .preview-body strong { font-weight: 700; color: var(--text); }
-
-    /* ── Empty State ─────────────────────────── */
+    /* Restoring the original Empty State CSS */
     .empty-state {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100%;
-      min-height: 320px;
+      min-height: 250px;
       color: var(--text3);
       font-size: 14px;
       text-align: center;
@@ -529,43 +464,34 @@
       mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M448 32H64C28.65 32 0 60.65 0 96v320c0 35.35 28.65 64 64 64h384c35.35 0 64-28.65 64-64V96C512 60.65 483.3 32 448 32zM212 176c0-11.05 8.954-20 20-20h104c11.05 0 20 8.954 20 20s-8.954 20-20 20H232C220.1 196 212 187.1 212 176zM356 336H156c-11.05 0-20-8.954-20-20s8.954-20 20-20h200c11.05 0 20 8.954 20 20S367.1 336 356 336zM356 256H156c-11.05 0-20-8.954-20-20s8.954-20 20-20h200c11.05 0 20 8.954 20 20S367.1 256 356 256z'/%3E%3C/svg%3E") no-repeat center;
     }
 
+    /* Markdown Inner Styling */
+    .preview-body h1, .preview-body h2 { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--text); margin-top: 1.5em; margin-bottom: 0.5em; }
+    .preview-body p { font-size: 15px; line-height: 1.8; color: var(--text2); margin-bottom: 1.2em; }
+    .preview-body code { font-family: 'JetBrains Mono', monospace; background: var(--code-bg); color: var(--accent); padding: 2px 6px; border-radius: 5px; }
+    .preview-body pre { margin: 1.5em 0; border-radius: 8px; border: 1px solid var(--border); background: var(--pre-bg); overflow: hidden; }
+    .preview-body pre code { display: block; padding: 20px; background: transparent; color: var(--text); overflow-x: auto; }
+
     /* ── Footer ──────────────────────────────── */
     .footbar {
-      height: 32px;
+      height: auto;
+      min-height: 32px;
       background: var(--topbar-bg);
       border-top: 1px solid var(--border);
       display: flex;
       align-items: center;
-      padding: 0 24px;
-      gap: 24px;
+      padding: 4px 24px;
+      gap: 16px;
+      flex-wrap: wrap; /* Adjusts for narrow mobile screens */
       flex-shrink: 0;
-      transition: background .3s, border-color .3s;
     }
     
-    .foot-item {
-      font-size: 11px;
-      color: var(--text3);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
+    .foot-item { font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 4px; }
     .foot-item b { color: var(--text2); font-weight: 700; }
 
-    /* ── Native PDF Print Rules ──────────────── */
     @media print {
       body * { visibility: hidden; }
       .preview-scroll, .preview-scroll * { visibility: visible; }
-      .preview-scroll {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: auto;
-        overflow: visible;
-        padding: 0;
-      }
-      .preview-body { max-width: 100%; }
-      pre, blockquote { page-break-inside: avoid; }
+      .preview-scroll { position: absolute; left: 0; top: 0; width: 100%; height: auto; overflow: visible; padding: 0; }
     }
   </style>
 </head>
@@ -606,7 +532,7 @@
   <div class="panel panel-right">
     <div class="panel-header">
       <span class="panel-label">Preview</span>
-      <button id="pdf-btn" class="pdf-btn" onclick="window.print()">Download as PDF</button>
+      <button id="pdf-btn" class="pdf-btn" onclick="window.print()">Download PDF</button>
     </div>
     <div class="preview-scroll">
       <div class="preview-body" id="preview-output">
@@ -619,9 +545,9 @@
 
 <footer class="footbar">
   <div class="foot-item">Words <b id="f-words">0</b></div>
-  <div class="foot-item">Characters <b id="f-chars">0</b></div>
+  <div class="foot-item">Chars <b id="f-chars">0</b></div>
   <div class="foot-item">Lines <b id="f-lines">0</b></div>
-  <div class="foot-item">Mode <b id="f-mode">Normal Markdown</b></div>
+  <div class="foot-item">Mode <b id="f-mode">Normal</b></div>
 </footer>
 
 <script>
@@ -632,7 +558,6 @@
   let mode = 'normal';
   let timer;
 
-  /* Marked config */
   marked.setOptions({ breaks: true, gfm: true });
   const renderer = new marked.Renderer();
   renderer.code = function(code, lang) {
@@ -644,7 +569,6 @@
   };
   marked.use({ renderer });
 
-  /* Render */
   function render(text) {
     if (!text.trim()) {
       output.innerHTML = '<div class="empty-state">Paste markdown on the left to preview it here.</div>';
@@ -653,12 +577,8 @@
       return;
     }
     
-    // Show PDF button if there is content
     pdfBtn.classList.add('visible');
-    
-    const src = mode === 'llm'
-      ? text.replace(/\\n/g, '\n').replace(/\\t/g, '\t')
-      : text;
+    const src = mode === 'llm' ? text.replace(/\\n/g, '\n').replace(/\\t/g, '\t') : text;
     output.innerHTML = marked.parse(src);
     stats(text);
   }
@@ -691,23 +611,20 @@
     }
   });
 
-  /* Mode */
   function setMode(m, btn) {
     mode = m;
     document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    document.getElementById('f-mode').textContent = m === 'llm' ? 'LLM Generated' : 'Normal Markdown';
+    document.getElementById('f-mode').textContent = m === 'llm' ? 'LLM' : 'Normal';
     render(input.value);
   }
 
-  /* Theme */
   function setTheme(t) {
     document.documentElement.setAttribute('data-theme', t);
     document.getElementById('hljs-light').disabled = (t === 'dark');
     document.getElementById('hljs-dark').disabled  = (t === 'light');
   }
 
-  /* Resizable divider */
   (function () {
     const div  = document.getElementById('divider');
     const ws   = document.getElementById('workspace');
